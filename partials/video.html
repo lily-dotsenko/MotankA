@@ -1,0 +1,54 @@
+<section class="video-section section" id="video">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section__header">
+      <h2 class="section__title fade-in-up" data-i18n="video.title">
+        The Art of Creation
+      </h2>
+      <div class="section__divider"></div>
+      <p class="section__subtitle fade-in-up" data-i18n="video.subtitle">
+        Watch how ancient tradition comes to life — thread by thread, prayer by
+        prayer.
+      </p>
+    </div>
+
+    <!-- Video Container -->
+    <div class="video-section__wrapper fade-in-up">
+      <div class="video-section__player">
+        <video
+          class="video-section__video"
+          controls
+          preload="metadata"
+          poster="img/IMG_7824.PNG"
+        >
+          <source src="video/motanka_fly.MP4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+
+        <!-- Overlay play button (hidden when controls are active) -->
+        <div class="video-section__overlay" id="videoOverlay">
+          <button
+            class="video-section__play-btn"
+            id="videoPlayBtn"
+            aria-label="Play video"
+          >
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <circle
+                cx="32"
+                cy="32"
+                r="31"
+                stroke="white"
+                stroke-width="2"
+                opacity="0.8"
+              />
+              <polygon points="26,20 26,44 46,32" fill="white" />
+            </svg>
+          </button>
+          <p class="video-section__overlay-text" data-i18n="video.overlay">
+            Watch the Magic Unfold
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

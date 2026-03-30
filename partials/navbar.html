@@ -1,0 +1,76 @@
+<nav class="navbar" id="navbar">
+  <div class="container navbar__container">
+    <!-- Logo -->
+    <a href="#" class="navbar__logo">
+      <img src="img/logo_motanka.png" alt="Motanka" class="navbar__logo-img" />
+    </a>
+
+    <!-- Navigation Links -->
+    <ul class="navbar__menu" id="navMenu">
+      <li>
+        <a href="#hero" class="navbar__link active" data-i18n="nav.home"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a href="#products" class="navbar__link" data-i18n="nav.products"
+          >Products</a
+        >
+      </li>
+      <li>
+        <a href="#about" class="navbar__link" data-i18n="nav.about">About</a>
+      </li>
+      <li>
+        <a href="#traditions" class="navbar__link" data-i18n="nav.traditions"
+          >Traditions</a
+        >
+      </li>
+      <li>
+        <a href="#contact" class="navbar__link" data-i18n="nav.contact"
+          >Contact</a
+        >
+      </li>
+    </ul>
+
+    <!-- Cart Icon -->
+    <div class="navbar__actions">
+      <div class="navbar__lang">
+        <button
+          class="navbar__lang-btn active"
+          id="langEn"
+          aria-label="English"
+        >
+          EN
+        </button>
+        <span class="navbar__lang-divider">|</span>
+        <button class="navbar__lang-btn" id="langUk" aria-label="Українська">
+          UA
+        </button>
+      </div>
+      <button class="navbar__cart-btn" id="cartToggle" aria-label="Open cart">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 01-8 0" />
+        </svg>
+        <span class="navbar__cart-count" id="cartCount">0</span>
+      </button>
+
+      <!-- Mobile Menu Toggle -->
+      <button class="navbar__burger" id="navToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</nav>

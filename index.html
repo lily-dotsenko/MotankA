@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Motanka Dolls — Handcrafted Ukrainian traditional dolls made with love and heritage."
+    />
+    <title>Motanka Dolls — Ukrainian Handcrafted Tradition</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Modular Styles -->
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/navbar.css" />
+    <link rel="stylesheet" href="styles/hero.css" />
+    <link rel="stylesheet" href="styles/products.css" />
+    <link rel="stylesheet" href="styles/about.css" />
+    <link rel="stylesheet" href="styles/traditions.css" />
+    <link rel="stylesheet" href="styles/video.css" />
+    <link rel="stylesheet" href="styles/contact.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <main>
+      <!-- Hero -->
+      <div id="hero-placeholder"></div>
+
+      <!-- Products -->
+      <div id="products-placeholder"></div>
+
+      <!-- About -->
+      <div id="about-placeholder"></div>
+
+      <!-- Traditions -->
+      <div id="traditions-placeholder"></div>
+
+      <!-- Video -->
+      <div id="video-placeholder"></div>
+
+      <!-- Contact -->
+      <div id="contact-placeholder"></div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- ========== Cart Side Drawer ========== -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+      <div class="cart-drawer__header">
+        <h2 data-i18n="cart.title">Your Cart</h2>
+        <button
+          class="cart-drawer__close"
+          id="cartClose"
+          aria-label="Close cart"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="cart-drawer__items" id="cartItems">
+        <!-- Cart items rendered by JS -->
+      </div>
+      <div class="cart-drawer__footer">
+        <div class="cart-drawer__total">
+          <span data-i18n="cart.totalLabel">Total:</span>
+          <span id="cartTotal">$0.00</span>
+        </div>
+        <button
+          class="btn btn--primary cart-drawer__checkout"
+          data-i18n="cart.checkout"
+        >
+          Checkout
+        </button>
+      </div>
+    </aside>
+
+    <!-- ========== Product Detail Modal ========== -->
+    <div
+      class="modal-overlay"
+      id="productModal"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div class="modal">
+        <button class="modal__close" id="modalClose" aria-label="Close modal">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="modal__content">
+          <div class="modal__image">
+            <img id="modalImage" src="" alt="" />
+          </div>
+          <div class="modal__details">
+            <h2 id="modalName"></h2>
+            <p class="modal__price" id="modalPrice"></p>
+            <p class="modal__description" id="modalDescription"></p>
+            <button
+              class="btn btn--primary modal__add-to-cart"
+              id="modalAddToCart"
+              data-i18n="cart.addToCart"
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modular Scripts -->
+    <script src="scripts/i18n.js"></script>
+    <script src="scripts/cart.js"></script>
+    <script src="scripts/products.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>
