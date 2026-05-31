@@ -1,9 +1,8 @@
 /* ============================================
-   AUTH.CSS — Admin login modal & admin UI elements
+   PRODUCT-FORM.CSS — Add / Edit product modal
    ============================================ */
 
-/* ========== Admin Login Modal ========== */
-.auth-modal-overlay {
+.product-form-overlay {
   position: fixed;
   inset: 0;
   background: var(--color-overlay);
@@ -15,30 +14,32 @@
   visibility: hidden;
   transition: opacity var(--transition-normal), visibility var(--transition-normal);
   padding: var(--space-md);
+  overflow-y: auto;
 }
 
-.auth-modal-overlay.active {
+.product-form-overlay.active {
   opacity: 1;
   visibility: visible;
 }
 
-.auth-modal {
+.product-form-modal {
   background: var(--color-warm-white);
   border-radius: var(--radius-xl);
-  padding: var(--space-2xl) var(--space-2xl);
+  padding: var(--space-2xl);
   width: 100%;
-  max-width: 420px;
+  max-width: 560px;
   position: relative;
   box-shadow: var(--shadow-xl);
-  transform: translateY(20px) scale(0.97);
+  transform: translateY(20px);
   transition: transform var(--transition-normal);
+  margin: auto;
 }
 
-.auth-modal-overlay.active .auth-modal {
-  transform: translateY(0) scale(1);
+.product-form-overlay.active .product-form-modal {
+  transform: translateY(0);
 }
 
-.auth-modal__close {
+.product-form-modal__close {
   position: absolute;
   top: var(--space-md);
   right: var(--space-md);
@@ -54,58 +55,39 @@
   transition: color var(--transition-fast), background var(--transition-fast);
 }
 
-.auth-modal__close:hover {
+.product-form-modal__close:hover {
   color: var(--color-text);
   background: var(--color-border);
 }
 
-.auth-modal__icon {
-  width: 52px;
-  height: 52px;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto var(--space-lg);
-}
-
-.auth-modal__icon svg {
-  width: 24px;
-  height: 24px;
-  stroke: #fff;
-  fill: none;
-}
-
-.auth-modal__title {
+.product-form-modal__title {
   font-family: var(--font-heading);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-text);
-  text-align: center;
-  margin-bottom: var(--space-xs);
-}
-
-.auth-modal__subtitle {
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-  text-align: center;
   margin-bottom: var(--space-xl);
+  padding-right: var(--space-xl);
 }
 
-.auth-modal__form {
+.product-form {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
 }
 
-.auth-modal__field {
+.product-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.product-form__field {
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
 }
 
-.auth-modal__label {
+.product-form__label {
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--color-text-light);
@@ -113,7 +95,8 @@
   text-transform: uppercase;
 }
 
-.auth-modal__input {
+.product-form__input,
+.product-form__textarea {
   padding: 0.75rem 1rem;
   border: 1.5px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -125,21 +108,73 @@
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.auth-modal__input:focus {
+.product-form__input:focus,
+.product-form__textarea:focus {
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px rgba(139, 26, 26, 0.1);
 }
 
-.auth-modal__error {
+.product-form__textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.5;
+}
+
+.product-form__image-preview {
+  margin-top: var(--space-xs);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  max-height: 160px;
+  display: none;
+  border: 1.5px solid var(--color-border);
+}
+
+.product-form__image-preview.visible {
+  display: block;
+}
+
+.product-form__image-preview img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.product-form__error {
   font-size: 0.8125rem;
   color: var(--color-error);
   text-align: center;
   min-height: 1.2em;
 }
 
-.auth-modal__submit {
+.product-form__actions {
+  display: flex;
+  gap: var(--space-md);
   margin-top: var(--space-sm);
-  padding: 0.875rem 1rem;
+}
+
+.product-form__cancel {
+  flex: 1;
+  padding: 0.875rem;
+  background: none;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.product-form__cancel:hover {
+  background: var(--color-border);
+  color: var(--color-text);
+}
+
+.product-form__submit {
+  flex: 2;
+  padding: 0.875rem;
   background: var(--color-primary);
   color: #fff;
   border: none;
@@ -151,20 +186,32 @@
   transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
-.auth-modal__submit:hover:not(:disabled) {
+.product-form__submit:hover:not(:disabled) {
   background: var(--color-primary-light);
   transform: translateY(-1px);
 }
 
-.auth-modal__submit:disabled {
+.product-form__submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-
-/* ========== Responsive ========== */
+/* ---------- Responsive ---------- */
 @media (max-width: 600px) {
-  .auth-modal {
+  .product-form-modal {
     padding: var(--space-xl) var(--space-lg);
+  }
+
+  .product-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .product-form__actions {
+    flex-direction: column;
+  }
+
+  .product-form__cancel,
+  .product-form__submit {
+    flex: none;
   }
 }

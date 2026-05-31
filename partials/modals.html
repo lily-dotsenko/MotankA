@@ -1,0 +1,176 @@
+<!-- ========== Cart Drawer ========== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="cart-drawer__header">
+    <h2 data-i18n="cart.title">Your Cart</h2>
+    <button
+      class="cart-drawer__close"
+      id="cartClose"
+      aria-label="Close cart"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  <div class="cart-drawer__items" id="cartItems">
+    <!-- Cart items rendered by JS -->
+  </div>
+  <div class="cart-drawer__footer">
+    <div class="cart-drawer__total">
+      <span data-i18n="cart.totalLabel">Total:</span>
+      <span id="cartTotal">$0.00</span>
+    </div>
+    <button
+      class="btn btn--primary cart-drawer__checkout"
+      data-i18n="cart.checkout"
+    >
+      Checkout
+    </button>
+  </div>
+</aside>
+
+<!-- ========== Product Detail Modal ========== -->
+<div
+  class="modal-overlay"
+  id="productModal"
+  role="dialog"
+  aria-modal="true"
+>
+  <div class="modal">
+    <button class="modal__close" id="modalClose" aria-label="Close modal">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="modal__content">
+      <div class="modal__image">
+        <img id="modalImage" src="" alt="" />
+      </div>
+      <div class="modal__details">
+        <h2 id="modalName"></h2>
+        <p class="modal__price" id="modalPrice"></p>
+        <p class="modal__description" id="modalDescription"></p>
+        <button
+          class="btn btn--primary modal__add-to-cart"
+          id="modalAddToCart"
+          data-i18n="cart.addToCart"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== Admin Login Modal ========== -->
+<div class="auth-modal-overlay" id="adminLoginModal" role="dialog" aria-modal="true">
+  <div class="auth-modal">
+    <button class="auth-modal__close" id="adminLoginModalClose" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <div class="auth-modal__icon">
+      <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+    </div>
+    <h2 class="auth-modal__title" data-i18n="auth.title">Admin Login</h2>
+    <p class="auth-modal__subtitle" data-i18n="auth.subtitle">Enter your credentials to manage the catalog</p>
+    <form class="auth-modal__form" id="adminLoginForm" novalidate>
+      <div class="auth-modal__field">
+        <label class="auth-modal__label" for="adminEmail" data-i18n="auth.emailLabel">Email</label>
+        <input class="auth-modal__input" type="email" id="adminEmail" autocomplete="email" required />
+      </div>
+      <div class="auth-modal__field">
+        <label class="auth-modal__label" for="adminPassword" data-i18n="auth.passwordLabel">Password</label>
+        <input class="auth-modal__input" type="password" id="adminPassword" autocomplete="current-password" required />
+      </div>
+      <p class="auth-modal__error" id="adminLoginError"></p>
+      <button class="auth-modal__submit" type="submit" id="adminLoginSubmit" data-i18n="auth.loginBtn">Sign In</button>
+    </form>
+  </div>
+</div>
+
+<!-- ========== Product Form Modal (Add / Edit) ========== -->
+<div class="product-form-overlay" id="productFormModal" role="dialog" aria-modal="true">
+  <div class="product-form-modal">
+    <button class="product-form-modal__close" id="productFormClose" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <h2 class="product-form-modal__title" id="productFormTitle" data-i18n="admin.addProduct">Add Product</h2>
+    <form class="product-form" id="productForm" novalidate>
+      <input type="hidden" id="productFormId" value="" />
+      <div class="product-form__row">
+        <div class="product-form__field">
+          <label class="product-form__label" for="pfName" data-i18n="admin.nameEn">Name (EN)</label>
+          <input class="product-form__input" type="text" id="pfName" required />
+        </div>
+        <div class="product-form__field">
+          <label class="product-form__label" for="pfNameUk" data-i18n="admin.nameUk">Name (UA)</label>
+          <input class="product-form__input" type="text" id="pfNameUk" />
+        </div>
+      </div>
+      <div class="product-form__field">
+        <label class="product-form__label" for="pfPrice" data-i18n="admin.price">Price ($)</label>
+        <input class="product-form__input" type="number" id="pfPrice" min="0" step="0.01" required />
+      </div>
+      <div class="product-form__field">
+        <label class="product-form__label" for="pfImage" data-i18n="admin.imageUrl">Image URL</label>
+        <input class="product-form__input" type="url" id="pfImage" placeholder="https://..." />
+        <div class="product-form__image-preview" id="pfImagePreview">
+          <img id="pfImagePreviewImg" src="" alt="Preview" />
+        </div>
+      </div>
+      <div class="product-form__field">
+        <label class="product-form__label" for="pfDescription" data-i18n="admin.descriptionEn">Description (EN)</label>
+        <textarea class="product-form__textarea" id="pfDescription" rows="3"></textarea>
+      </div>
+      <div class="product-form__field">
+        <label class="product-form__label" for="pfDescriptionUk" data-i18n="admin.descriptionUk">Description (UA)</label>
+        <textarea class="product-form__textarea" id="pfDescriptionUk" rows="3"></textarea>
+      </div>
+      <p class="product-form__error" id="productFormError"></p>
+      <div class="product-form__actions">
+        <button type="button" class="product-form__cancel" id="productFormCancel" data-i18n="admin.cancel">Cancel</button>
+        <button type="submit" class="product-form__submit" id="productFormSubmit" data-i18n="admin.save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ========== Delete Confirmation Modal ========== -->
+<div class="delete-confirm-overlay" id="deleteConfirmModal" role="dialog" aria-modal="true">
+  <div class="delete-confirm-modal">
+    <div class="delete-confirm-modal__icon">
+      <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
+    </div>
+    <h2 class="delete-confirm-modal__title" data-i18n="admin.deleteTitle">Delete Product?</h2>
+    <p class="delete-confirm-modal__subtitle">
+      <span data-i18n="admin.deleteWarning">Are you sure you want to delete</span>
+      <span class="delete-confirm-modal__product-name" id="deleteProductName"></span>?
+      <br><span data-i18n="admin.deleteCannotUndo">This action cannot be undone.</span>
+    </p>
+    <div class="delete-confirm-modal__actions">
+      <button type="button" class="delete-confirm-modal__cancel" id="deleteCancelBtn" data-i18n="admin.cancel">Cancel</button>
+      <button type="button" class="delete-confirm-modal__confirm" id="deleteConfirmBtn" data-i18n="admin.deleteConfirm">Delete</button>
+    </div>
+  </div>
+</div>
