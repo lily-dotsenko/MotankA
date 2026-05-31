@@ -102,8 +102,8 @@ const Cart = (function () {
           typeof I18n !== "undefined" &&
           I18n.getLang() === "uk"
         ) {
-          var tr = I18n.getProductTranslation(item.id);
-          if (tr && tr.name) displayName = tr.name;
+          var product = Products.getByFirestoreId(item.id);
+          if (product && product.nameUk) displayName = product.nameUk;
         }
         return `
       <div class="cart-item" data-id="${item.id}">
@@ -169,7 +169,7 @@ const Cart = (function () {
     document.getElementById("cartItems")?.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-action]");
       if (!btn) return;
-      const id = Number(btn.dataset.id);
+      const id = btn.dataset.id;
       const action = btn.dataset.action;
 
       if (action === "increase") updateQty(id, 1);

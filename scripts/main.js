@@ -372,8 +372,9 @@
 
     // Initialise modules after partials are loaded
     Cart.init();
-    Products.init();
+    await Products.init();
     if (typeof I18n !== "undefined") I18n.init();
+    if (typeof Auth !== "undefined") Auth.init();
     initNavbar();
     initSmoothScroll();
     initScrollToTop();
