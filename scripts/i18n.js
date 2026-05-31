@@ -548,3 +548,72 @@ const I18n = (function () {
     applyTranslations: applyTranslations,
   };
 })();
+
+/* ============================================
+   CURRENCY — switching USD / UAH / EUR
+   (placed here so it loads before cart.js & products.js)
+   ============================================ */
+const Currency = (function () {
+  "use strict";
+
+  const STORAGE_KEY = "motanka_currency";
+
+  /* Static exchange rates relative to USD */
+  const RATES   = { usd: 1, uah: 41.5, eur: 0.92 };
+  const SYMBOLS = { usd: "$", uah: "\u20b4", eur: "\u20ac" };
+
+  /* Language-based default on first visit */
+  let currentCurrency =
+    localStorage.getItem(STORAGE_KEY) ||
+    (I18n.getLang() === "uk" ? "uah" : "usd");
+
+  /* -------- Format a USD base-price -------- */
+  function format(priceUSD) {
+    var rate   = RATES[currentCurrency]   || 1;
+    var symbol = SYMBOLS[currentCurrency] || "$";
+    return symbol + (priceUSD * rate).toFixed(2);
+  }
+
+  function getCurrency() { return currentCurrency; }
+
+  /* -------- Switch currency & re-render -------- */
+  function setCurrency(code) {
+    if (!RATES[code] || code === currentCurrency) return;
+    currentCurrency = code;
+    localStorage.setItem(STORAGE_KEY, code);
+    updateButtons();
+    if (typeof Products !== "undefined" && Products.renderGrid) Products.renderGrid();
+    if (typeof Cart     !== "undefined" && Cart.render)          Cart.render();
+    /* Update quick-view modal price if it is open */
+    var modal = document.getElementById("productModal");
+    if (modal && modal.classList.contains("active")) {
+      var addBtn  = document.getElementById("modalAddToCart");
+      var priceEl = document.getElementById("modalPrice");
+      if (addBtn && priceEl && addBtn.dataset.firestoreId && typeof Products !== "undefined") {
+        var prod = Products.getByFirestoreId(addBtn.dataset.firestoreId);
+        if (prod) priceEl.textContent = format(prod.price);
+      }
+    }
+  }
+
+  /* -------- Active state on navbar buttons -------- */
+  function updateButtons() {
+    ["usd", "uah", "eur"].forEach(function (code) {
+      var btn = document.getElementById("curr" + code.charAt(0).toUpperCase() + code.slice(1));
+      if (btn) btn.classList.toggle("active", code === currentCurrency);
+    });
+  }
+
+  /* -------- Init -------- */
+  function init() {
+    updateButtons();
+    var usdBtn = document.getElementById("currUsd");
+    var uahBtn = document.getElementById("currUah");
+    var eurBtn = document.getElementById("currEur");
+    if (usdBtn) usdBtn.addEventListener("click", function () { setCurrency("usd"); });
+    if (uahBtn) uahBtn.addEventListener("click", function () { setCurrency("uah"); });
+    if (eurBtn) eurBtn.addEventListener("click", function () { setCurrency("eur"); });
+  }
+
+  return { init: init, format: format, getCurrency: getCurrency, setCurrency: setCurrency, updateButtons: updateButtons };
+})();

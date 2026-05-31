@@ -89,7 +89,7 @@ const Cart = (function () {
           </svg>
           <p>${emptyText}</p>
         </div>`;
-      totalEl.textContent = "$0.00";
+      totalEl.textContent = typeof Currency !== "undefined" ? Currency.format(0) : "$0.00";
       return;
     }
 
@@ -112,7 +112,7 @@ const Cart = (function () {
         </div>
         <div class="cart-item__details">
           <p class="cart-item__name">${displayName}</p>
-          <p class="cart-item__price">$${item.price.toFixed(2)}</p>
+          <p class="cart-item__price">${typeof Currency !== "undefined" ? Currency.format(item.price) : "$" + item.price.toFixed(2)}</p>
           <div class="cart-item__controls">
             <button class="cart-item__qty-btn" data-action="decrease" data-id="${item.id}">−</button>
             <span class="cart-item__qty">${item.qty}</span>
@@ -124,7 +124,7 @@ const Cart = (function () {
       })
       .join("");
 
-    totalEl.textContent = `$${getTotal().toFixed(2)}`;
+    totalEl.textContent = typeof Currency !== "undefined" ? Currency.format(getTotal()) : "$" + getTotal().toFixed(2);
   }
 
   /* -------- Badge -------- */

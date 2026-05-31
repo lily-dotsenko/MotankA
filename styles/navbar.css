@@ -103,6 +103,13 @@
   gap: 4px;
 }
 
+/* ---------- Currency Toggle ---------- */
+.navbar__currency {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .navbar__lang-btn {
   background: none;
   border: none;

@@ -237,7 +237,7 @@ const Products = (function () {
           </div>
           <div class="product-card__info">
             <h3 class="product-card__name">${getLocalizedName(product)}</h3>
-            <p class="product-card__price">$${Number(product.price).toFixed(2)}</p>
+            <p class="product-card__price">${typeof Currency !== "undefined" ? Currency.format(product.price) : "$" + Number(product.price).toFixed(2)}</p>
             <button
               class="product-card__add-btn"
               data-action="add-to-cart"
@@ -442,7 +442,7 @@ const Products = (function () {
     document.getElementById("modalImage").src = product.image || "";
     document.getElementById("modalImage").alt = getLocalizedName(product);
     document.getElementById("modalName").textContent = getLocalizedName(product);
-    document.getElementById("modalPrice").textContent = `$${Number(product.price).toFixed(2)}`;
+    document.getElementById("modalPrice").textContent = typeof Currency !== "undefined" ? Currency.format(product.price) : "$" + Number(product.price).toFixed(2);
     document.getElementById("modalDescription").textContent = getLocalizedDescription(product);
     document.getElementById("modalAddToCart").dataset.firestoreId = product.firestoreId;
     document.getElementById("modalAddToCart").textContent = tSafe("cart.addToCart");

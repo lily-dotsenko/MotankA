@@ -35,18 +35,13 @@ const Auth = (function () {
 
   /* -------- Update navbar UI -------- */
   function updateNavbarUI() {
-    const loginBtn = document.getElementById("adminLoginBtn");
     const logoutBtn = document.getElementById("adminLogoutBtn");
     const adminBadge = document.getElementById("adminBadge");
 
-    if (!loginBtn) return;
-
     if (isAdmin()) {
-      loginBtn.style.display = "none";
       if (logoutBtn) logoutBtn.style.display = "inline-flex";
       if (adminBadge) adminBadge.style.display = "inline-block";
     } else {
-      loginBtn.style.display = "inline-flex";
       if (logoutBtn) logoutBtn.style.display = "none";
       if (adminBadge) adminBadge.style.display = "none";
     }
@@ -129,9 +124,25 @@ const Auth = (function () {
 
   /* -------- Init events -------- */
   function initEvents() {
-    // Open login modal
-    const loginBtn = document.getElementById("adminLoginBtn");
-    if (loginBtn) loginBtn.addEventListener("click", openLoginModal);
+    // Triple-click / triple-tap on logo opens login modal (hidden admin entry)
+    const logo = document.querySelector(".navbar__logo");
+    if (logo) {
+      let clickCount = 0;
+      let resetTimer = null;
+      logo.addEventListener("click", function (e) {
+        e.preventDefault();
+        clickCount += 1;
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(function () {
+          clickCount = 0;
+        }, 600);
+        if (clickCount >= 3) {
+          clickCount = 0;
+          clearTimeout(resetTimer);
+          openLoginModal();
+        }
+      });
+    }
 
     // Close login modal
     const closeBtn = document.getElementById("adminLoginModalClose");
